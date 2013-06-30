@@ -1,0 +1,18 @@
+{{extend 'layout.html'}}
+{{if is_following is not None:}}
+{{if is_following:}}
+<div><button onclick="ajax('{{=URL('follow',args=('unfollow',user.id))}}',[],null);$(this).parent().html('Unfollowed')">Unfollow</button></div>
+{{else:}}
+<div><button onclick="ajax('{{=URL('follow',args=('follow',user.id))}}',[],null);$(this).parent().html('Following')">Follow</button></div>
+{{pass}}
+{{pass}}
+
+<h2>Profile</h2>
+{{=crud.read(db.auth_user,user)}}
+<h2>Messages</h2>
+{{for weet in weets:}}
+<div style="background: #f0f0f0; margin-bottom: 5px; padding: 8px;">
+ <h3>{{=name_of(weet.posted_by)}} on {{=weet.posted_on}}:</h3>
+  {{=MARKMIN(weet.body)}}
+</div>
+{{pass}}

@@ -1,0 +1,9 @@
+{{extend 'layout.html'}}
+{{=form}}
+<script>$('textarea').css('width','600px').css('height','50px');</script>
+{{for weet in weets:}}
+<div style="background: #f0f0f0; margin-bottom: 5px; padding: 8px;">
+  <h3>{{=name_of(weet.posted_by)}} on {{=weet.posted_on}}:</h3>
+  {{=MARKMIN(weet.body)}}
+</div>
+{{pass}}

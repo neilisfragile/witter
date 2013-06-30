@@ -1,0 +1,22 @@
+{{extend 'layout.html'}}
+<h2>Search for people to follow</h2>
+{{=form}}
+
+{{if people:}}
+<h3>Results</h3>
+<div>
+    
+    {{for user in people:}}
+    <div class="row">    
+    <div class="span3 offset1">{{=A(name_of(user.auth_user), _href=URL('wall',args=user.auth_user.id))}}</div>
+    <div class="span1">
+    {{if user.followers.followee:}}
+	<button onclick="ajax('{{=URL('follow',args=('unfollow',user.auth_user.id))}}',[],null);$(this).parent().html('Unfollowed')">Unfollow</button>
+    {{else:}}
+    <button onclick="ajax('{{=URL('follow',args=('follow',user.auth_user.id))}}',[],null);$(this).parent().html('Followed')">Follow</button>        
+    {{pass}}
+    </div>
+    </div>
+    {{pass}}
+</div>
+{{pass}}
